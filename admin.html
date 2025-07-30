@@ -64,11 +64,11 @@
     <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
-  <!-- Firebase SDK (compat version for v8 style syntax) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <!-- Firebase SDK (modular v9+ version) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCPYDnOZM7_H5C5OQXqwa0VSkH80sbd_c",
       authDomain: "garcia-and-pena.firebaseapp.com",
@@ -79,15 +79,15 @@
       measurementId: "G-CN30ETFRWB"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    function authenticate(event) {
+    window.authenticate = (event) => {
       event.preventDefault();
       const email = document.getElementById("adminUser").value;
       const password = document.getElementById("adminPass").value;
 
-      auth.signInWithEmailAndPassword(email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           document.getElementById("loginContainer").classList.remove("visible");
           document.getElementById("adminDashboard").classList.add("visible");
@@ -96,19 +96,19 @@
         .catch((error) => {
           document.getElementById("errorMsg").textContent = "❌ " + error.message;
         });
-    }
+    };
 
-    function logout() {
-      auth.signOut().then(() => {
+    window.logout = () => {
+      signOut(auth).then(() => {
         document.getElementById("adminDashboard").classList.remove("visible");
         document.getElementById("loginContainer").classList.add("visible");
         document.getElementById("adminUser").value = "";
         document.getElementById("adminPass").value = "";
         document.getElementById("errorMsg").textContent = "";
       });
-    }
+    };
 
-    auth.onAuthStateChanged(user => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         document.getElementById("loginContainer").classList.remove("visible");
         document.getElementById("adminDashboard").classList.add("visible");
