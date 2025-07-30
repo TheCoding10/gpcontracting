@@ -906,4 +906,595 @@
                         </div>
                         <div class="form-group">
                             <label>Estimated Budget</label>
-                            <input type="number" id="clientBudget" min="0" step="
+                            <input type="number" id="clientBudget" min="0" step="100" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="clientNotes" rows="3" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;"></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                        <button type="button" class="btn-secondary" onclick="closeModal('addClientModal')">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Client</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data with more realistic entries
+        let clients = [
+            {
+                id: 1,
+                firstName: "John",
+                lastName: "Smith",
+                email: "john.smith@email.com",
+                phone: "(914) 555-0123",
+                address: "123 Maple Street, White Plains, NY 10601",
+                projectType: "Kitchen Remodeling",
+                status: "active",
+                budget: 35000,
+                notes: "Modern kitchen design, quartz countertops, stainless appliances",
+                dateAdded: "2024-01-15",
+                lastContact: "2024-01-25"
+            },
+            {
+                id: 2,
+                firstName: "Sarah",
+                lastName: "Johnson",
+                email: "sarah.johnson@email.com",
+                phone: "(203) 555-0456",
+                address: "456 Oak Avenue, Stamford, CT 06901",
+                projectType: "Bathroom Renovation",
+                status: "pending",
+                budget: 18000,
+                notes: "Master bathroom renovation, walk-in shower, heated floors",
+                dateAdded: "2024-01-20",
+                lastContact: "2024-01-22"
+            },
+            {
+                id: 3,
+                firstName: "Michael",
+                lastName: "Rodriguez",
+                email: "m.rodriguez@email.com",
+                phone: "(914) 555-0789",
+                address: "789 Pine Road, Westchester, NY 10583",
+                projectType: "Home Addition",
+                status: "completed",
+                budget: 65000,
+                notes: "Family room addition with fireplace - COMPLETED",
+                dateAdded: "2023-11-10",
+                lastContact: "2024-01-05"
+            },
+            {
+                id: 4,
+                firstName: "Lisa",
+                lastName: "Chen",
+                email: "lisa.chen@email.com",
+                phone: "(203) 555-0321",
+                address: "321 Elm Street, Norwalk, CT 06851",
+                projectType: "Commercial Construction",
+                status: "active",
+                budget: 125000,
+                notes: "Medical office build-out, specialized ventilation required",
+                dateAdded: "2024-01-12",
+                lastContact: "2024-01-26"
+            },
+            {
+                id: 5,
+                firstName: "David",
+                lastName: "Thompson",
+                email: "dthompson@email.com",
+                phone: "(914) 555-0654",
+                address: "654 Birch Lane, Scarsdale, NY 10583",
+                projectType: "Bathroom Renovation",
+                status: "cancelled",
+                budget: 22000,
+                notes: "Project cancelled due to budget constraints",
+                dateAdded: "2024-01-08",
+                lastContact: "2024-01-18"
+            }
+        ];
+
+        let projects = [
+            {
+                id: 1,
+                clientId: 1,
+                title: "Smith Modern Kitchen Remodel",
+                description: "Complete kitchen renovation with custom cabinets",
+                value: 35000,
+                progress: 75,
+                status: "In Progress",
+                startDate: "2024-02-01",
+                estimatedCompletion: "2024-03-15",
+                actualHours: 120,
+                estimatedHours: 160
+            },
+            {
+                id: 2,
+                clientId: 4,
+                title: "Chen Medical Office Build-out",
+                description: "Medical office construction with specialized systems",
+                value: 125000,
+                progress: 40,
+                status: "In Progress",
+                startDate: "2024-01-15",
+                estimatedCompletion: "2024-04-30",
+                actualHours: 200,
+                estimatedHours: 500
+            },
+            {
+                id: 3,
+                clientId: 3,
+                title: "Rodriguez Family Room Addition",
+                description: "Single-story family room with fireplace",
+                value: 65000,
+                progress: 100,
+                status: "Completed",
+                startDate: "2023-11-15",
+                estimatedCompletion: "2024-01-15",
+                actualHours: 280,
+                estimatedHours: 300
+            }
+        ];
+
+        let quotes = [
+            {
+                id: 1,
+                clientId: 2,
+                title: "Johnson Bathroom Renovation Quote",
+                amount: 18000,
+                status: "Pending",
+                createdDate: "2024-01-20",
+                validUntil: "2024-02-20",
+                items: [
+                    { description: "Demo and disposal", amount: 2000 },
+                    { description: "Plumbing rough-in", amount: 3500 },
+                    { description: "Tile work", amount: 4500 },
+                    { description: "Fixtures and materials", amount: 6000 },
+                    { description: "Labor and finishing", amount: 2000 }
+                ]
+            },
+            {
+                id: 2,
+                clientId: 1,
+                title: "Smith Kitchen Remodel Quote",
+                amount: 35000,
+                status: "Accepted",
+                createdDate: "2024-01-15",
+                validUntil: "2024-02-15",
+                items: [
+                    { description: "Custom cabinets", amount: 15000 },
+                    { description: "Quartz countertops", amount: 8000 },
+                    { description: "Appliances", amount: 7000 },
+                    { description: "Installation and labor", amount: 5000 }
+                ]
+            }
+        ];
+
+        let currentUser = "";
+        let currentTab = "clients";
+
+        // Authentication system
+        function authenticate(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('adminUser').value;
+            const password = document.getElementById('adminPass').value;
+            
+            // Admin credentials - CHANGE THESE FOR PRODUCTION
+            const validCredentials = [
+                { username: "admin", password: "GP2024!Admin" },
+                { username: "garcia", password: "Garcia@2024" },
+                { username: "pena", password: "Pena@2024" }
+            ];
+            
+            const isValid = validCredentials.some(cred => 
+                cred.username === username && cred.password === password
+            );
+            
+            if (isValid) {
+                currentUser = username.charAt(0).toUpperCase() + username.slice(1);
+                showSuccess("Login successful! Loading dashboard...");
+                
+                setTimeout(() => {
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                    document.getElementById('currentUser').textContent = currentUser;
+                    loadDashboard();
+                }, 1000);
+            } else {
+                showError("Invalid credentials. Please try again.");
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMsg');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('successMsg').style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMsg');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                document.getElementById('adminDashboard').style.display = 'none';
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                document.getElementById('errorMsg').style.display = 'none';
+                document.getElementById('successMsg').style.display = 'none';
+            }
+        }
+
+        // Dashboard functions
+        function loadDashboard() {
+            updateStats();
+            loadClients();
+            loadProjects();
+            loadQuotes();
+        }
+
+        function updateStats() {
+            document.getElementById('totalClients').textContent = clients.length;
+            document.getElementById('activeProjects').textContent = projects.filter(p => p.status === 'In Progress').length;
+            document.getElementById('totalRevenue').textContent = ' + projects.reduce((sum, p) => sum + p.value, 0).toLocaleString();
+            document.getElementById('pendingQuotes').textContent = quotes.filter(q => q.status === 'Pending').length;
+        }
+
+        // Tab management
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+        }
+
+        // Client management
+        function loadClients() {
+            const tbody = document.getElementById('clientsTableBody');
+            tbody.innerHTML = '';
+            
+            clients.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div>
+                            <strong>${client.firstName} ${client.lastName}</strong><br>
+                            <small style="color: #666;">ID: #${client.id.toString().padStart(4, '0')}</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div>${client.email}</div>
+                            <div>${client.phone}</div>
+                        </div>
+                    </td>
+                    <td>${client.projectType}</td>
+                    <td><span class="status-badge status-${client.status}">${client.status}</span></td>
+                    <td>${client.budget.toLocaleString()}</td>
+                    <td>${client.dateAdded}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-view" onclick="viewClient(${client.id})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-action btn-edit" onclick="editClient(${client.id})" title="Edit Client">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-action btn-delete" onclick="deleteClient(${client.id})" title="Delete Client">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function filterClients() {
+            const searchTerm = document.getElementById('clientSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('clientStatusFilter').value;
+            const projectFilter = document.getElementById('projectTypeFilter').value;
+            
+            const filteredClients = clients.filter(client => {
+                const matchesSearch = 
+                    client.firstName.toLowerCase().includes(searchTerm) ||
+                    client.lastName.toLowerCase().includes(searchTerm) ||
+                    client.email.toLowerCase().includes(searchTerm) ||
+                    client.phone.includes(searchTerm);
+                
+                const matchesStatus = !statusFilter || client.status === statusFilter;
+                const matchesProject = !projectFilter || client.projectType === projectFilter;
+                
+                return matchesSearch && matchesStatus && matchesProject;
+            });
+            
+            const tbody = document.getElementById('clientsTableBody');
+            tbody.innerHTML = '';
+            
+            filteredClients.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div>
+                            <strong>${client.firstName} ${client.lastName}</strong><br>
+                            <small style="color: #666;">ID: #${client.id.toString().padStart(4, '0')}</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div>${client.email}</div>
+                            <div>${client.phone}</div>
+                        </div>
+                    </td>
+                    <td>${client.projectType}</td>
+                    <td><span class="status-badge status-${client.status}">${client.status}</span></td>
+                    <td>${client.budget.toLocaleString()}</td>
+                    <td>${client.dateAdded}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-view" onclick="viewClient(${client.id})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-action btn-edit" onclick="editClient(${client.id})" title="Edit Client">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-action btn-delete" onclick="deleteClient(${client.id})" title="Delete Client">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function addClient(event) {
+            event.preventDefault();
+            
+            const newClient = {
+                id: Math.max(...clients.map(c => c.id)) + 1,
+                firstName: document.getElementById('clientFirstName').value,
+                lastName: document.getElementById('clientLastName').value,
+                email: document.getElementById('clientEmail').value,
+                phone: document.getElementById('clientPhone').value,
+                address: document.getElementById('clientAddress').value,
+                projectType: document.getElementById('clientProjectType').value,
+                status: 'pending',
+                budget: parseInt(document.getElementById('clientBudget').value) || 0,
+                notes: document.getElementById('clientNotes').value,
+                dateAdded: new Date().toISOString().split('T')[0],
+                lastContact: new Date().toISOString().split('T')[0]
+            };
+            
+            clients.push(newClient);
+            loadClients();
+            updateStats();
+            closeModal('addClientModal');
+            
+            // Reset form
+            event.target.reset();
+            
+            alert(`✅ Client "${newClient.firstName} ${newClient.lastName}" added successfully!`);
+        }
+
+        function viewClient(clientId) {
+            const client = clients.find(c => c.id === clientId);
+            if (client) {
+                alert(`Client Details:\n\nName: ${client.firstName} ${client.lastName}\nEmail: ${client.email}\nPhone: ${client.phone}\nAddress: ${client.address}\nProject: ${client.projectType}\nBudget: ${client.budget.toLocaleString()}\nStatus: ${client.status}\nNotes: ${client.notes}`);
+            }
+        }
+
+        function editClient(clientId) {
+            alert('Edit functionality would open a modal with pre-filled form data.');
+        }
+
+        function deleteClient(clientId) {
+            const client = clients.find(c => c.id === clientId);
+            if (client && confirm(`Are you sure you want to delete "${client.firstName} ${client.lastName}"?`)) {
+                clients = clients.filter(c => c.id !== clientId);
+                loadClients();
+                updateStats();
+                alert('✅ Client deleted successfully!');
+            }
+        }
+
+        // Project management
+        function loadProjects() {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+            
+            projects.forEach(project => {
+                const client = clients.find(c => c.id === project.clientId);
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">${project.title}</div>
+                            <div class="project-client">Client: ${client ? client.firstName + ' ' + client.lastName : 'Unknown'}</div>
+                        </div>
+                        <div class="project-value">${project.value.toLocaleString()}</div>
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <div><strong>Status:</strong> ${project.status}</div>
+                        <div><strong>Start:</strong> ${project.startDate}</div>
+                        <div><strong>Est. Completion:</strong> ${project.estimatedCompletion}</div>
+                    </div>
+                    
+                    <div class="project-progress">
+                        <div class="progress-label">
+                            <span>Progress</span>
+                            <span>${project.progress}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${project.progress}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <button class="btn-action btn-view" onclick="viewProject(${project.id})">View</button>
+                        <button class="btn-action btn-edit" onclick="editProject(${project.id})">Edit</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function viewProject(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            const client = clients.find(c => c.id === project.clientId);
+            
+            if (project) {
+                alert(`Project Details:\n\nTitle: ${project.title}\nClient: ${client ? client.firstName + ' ' + client.lastName : 'Unknown'}\nValue: ${project.value.toLocaleString()}\nProgress: ${project.progress}%\nStatus: ${project.status}\nDescription: ${project.description}`);
+            }
+        }
+
+        function editProject(projectId) {
+            alert('Edit project functionality would open a detailed project management modal.');
+        }
+
+        // Quote management
+        function loadQuotes() {
+            const container = document.getElementById('quotesContainer');
+            container.innerHTML = '';
+            
+            quotes.forEach(quote => {
+                const client = clients.find(c => c.id === quote.clientId);
+                const quoteDiv = document.createElement('div');
+                quoteDiv.style.cssText = `
+                    background: #f8f9fa;
+                    border: 2px solid #e0e0e0;
+                    border-radius: 16px;
+                    padding: 25px;
+                    margin: 20px 0;
+                    transition: all 0.3s ease;
+                `;
+                
+                quoteDiv.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3>${quote.title}</h3>
+                        <span class="status-badge status-${quote.status.toLowerCase()}">${quote.status}</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong>Client:</strong> ${client ? client.firstName + ' ' + client.lastName : 'Unknown'}<br>
+                        <strong>Amount:</strong> ${quote.amount.toLocaleString()}<br>
+                        <strong>Created:</strong> ${quote.createdDate}<br>
+                        <strong>Valid Until:</strong> ${quote.validUntil}
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-action btn-view" onclick="viewQuote(${quote.id})">View Details</button>
+                        <button class="btn-action btn-edit" onclick="editQuote(${quote.id})">Edit</button>
+                        <button class="btn-action btn-delete" onclick="deleteQuote(${quote.id})">Delete</button>
+                    </div>
+                `;
+                
+                container.appendChild(quoteDiv);
+            });
+        }
+
+        function viewQuote(quoteId) {
+            const quote = quotes.find(q => q.id === quoteId);
+            if (quote && quote.items) {
+                let itemsText = quote.items.map(item => 
+                    `${item.description}: ${item.amount.toLocaleString()}`
+                ).join('\n');
+                
+                alert(`Quote Details:\n\n${quote.title}\nTotal: ${quote.amount.toLocaleString()}\n\nBreakdown:\n${itemsText}`);
+            }
+        }
+
+        function editQuote(quoteId) {
+            alert('Edit quote functionality would open a detailed quote builder.');
+        }
+
+        function deleteQuote(quoteId) {
+            if (confirm('Are you sure you want to delete this quote?')) {
+                quotes = quotes.filter(q => q.id !== quoteId);
+                loadQuotes();
+                updateStats();
+                alert('✅ Quote deleted successfully!');
+            }
+        }
+
+        // Modal functions
+        function showAddClientModal() {
+            document.getElementById('addClientModal').classList.add('show');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // Export functions
+        function exportClients() {
+            const csvContent = [
+                ['Name', 'Email', 'Phone', 'Project Type', 'Status', 'Budget', 'Date Added'],
+                ...clients.map(client => [
+                    `${client.firstName} ${client.lastName}`,
+                    client.email,
+                    client.phone,
+                    client.projectType,
+                    client.status,
+                    client.budget,
+                    client.dateAdded
+                ])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `garcia-pena-clients-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function generateReport() {
+            alert('PDF report generation would integrate with a PDF library to create comprehensive business reports.');
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('show');
+            }
+        });
+
+        // Initialize
+        console.log('🔐 Garcia & Pena Admin Portal Loaded');
+        console.log('📊 Access credentials:');
+        console.log('   • admin / GP2024!Admin');
+        console.log('   • garcia / Garcia@2024'); 
+        console.log('   • pena / Pena@2024');
+    </script>
+</body>
+</html>
