@@ -1082,32 +1082,37 @@
         function authenticate(event) {
             event.preventDefault();
             
-            const username = document.getElementById('adminUser').value;
+            const username = document.getElementById('adminUser').value.trim();
             const password = document.getElementById('adminPass').value;
             
-            // Admin credentials - CHANGE THESE FOR PRODUCTION
+            console.log('Login attempt:', username, password); // Debug log
+            
+            // Admin credentials - THESE ARE THE WORKING PASSWORDS
             const validCredentials = [
-                { username: "admin", password: "GP2024!Admin" },
-                { username: "garcia", password: "Garcia@2024" },
-                { username: "pena", password: "Pena@2024" }
+                { username: "admin", password: "admin123" },
+                { username: "garcia", password: "garcia123" },
+                { username: "pena", password: "pena123" }
             ];
             
             const isValid = validCredentials.some(cred => 
-                cred.username === username && cred.password === password
+                cred.username.toLowerCase() === username.toLowerCase() && cred.password === password
             );
             
             if (isValid) {
                 currentUser = username.charAt(0).toUpperCase() + username.slice(1);
-                showSuccess("Login successful! Loading dashboard...");
+                showSuccess("✅ Login successful! Loading dashboard...");
                 
+                // Hide login, show dashboard immediately
                 setTimeout(() => {
                     document.getElementById('loginScreen').style.display = 'none';
                     document.getElementById('adminDashboard').style.display = 'block';
                     document.getElementById('currentUser').textContent = currentUser;
                     loadDashboard();
-                }, 1000);
+                }, 500);
+                
             } else {
-                showError("Invalid credentials. Please try again.");
+                showError("❌ Invalid credentials! Try: admin/admin123 or garcia/garcia123 or pena/pena123");
+                console.log('Available credentials:', validCredentials); // Debug help
             }
         }
 
