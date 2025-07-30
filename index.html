@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garcia and Pena General Contracting - Professional Construction Services</title>
+    <title>Garcia & Pena General Contracting - Award-Winning Construction Excellence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2d2d2d;
+            --accent-blue: #0066cc;
+            --text-light: #f8f9fa;
+            --text-dark: #333;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-subtle: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-intense: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,686 +28,867 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--primary-dark);
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
         
-        .header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        /* Advanced Navigation */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .header-content {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .header .tagline {
-            font-size: 1rem;
-            color: #bdc3c7;
-            font-weight: 300;
-        }
-        
-        .contact-info {
-            text-align: right;
-            font-size: 0.9rem;
-        }
-        
-        .contact-info div {
-            margin-bottom: 5px;
-        }
-        
-        .hero-section {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23ecf0f1" width="1000" height="600"/><rect fill="%23bdc3c7" x="0" y="500" width="1000" height="100"/></svg>');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero-content h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .hero-content p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            line-height: 1.5;
-        }
-        
-        .hero-features {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .hero-feature {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .hero-feature h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #3498db;
-        }
-        
-        .hero-feature p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .main-content {
-            padding: 60px 0;
-        }
-        
-        .intro-section {
-            background: white;
-            padding: 50px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 50px;
-        }
-        
-        .intro-section h2 {
-            font-size: 2.2rem;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .intro-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #555;
-            text-align: center;
-            max-width: 900px;
+            padding: 16px 24px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .cta-nav {
+            background: var(--gradient-gold);
+            color: var(--primary-dark);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-intense);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.8) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><pattern id="construction" patternUnits="userSpaceOnUse" width="100" height="100"><rect fill="%23333" width="100" height="100"/><rect fill="%23444" x="20" y="20" width="60" height="60"/></pattern></defs><rect width="1920" height="1080" fill="url(%23construction)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--primary-dark);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-subtle);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-intense);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            padding: 16px 32px;
+            border: 2px solid var(--glass-border);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: var(--primary-dark);
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            padding: 40px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Services Section */
         .services-section {
-            margin: 50px 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 120px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
         
         .section-title {
-            font-size: 2.2rem;
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 700;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-bottom: 50px;
+            margin-top: 80px;
         }
         
         .service-card {
-            background: white;
-            border-radius: 8px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            group: hover;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--gradient-gold);
+            border-radius: 24px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
         }
         
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-intense);
         }
         
-        .service-header {
-            background-color: #34495e;
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-        
-        .service-header h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
+        .service-icon {
+            background: var(--gradient-gold);
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 30px 20px;
+            font-size: 2rem;
+            color: var(--primary-dark);
         }
         
         .service-content {
-            padding: 25px;
+            padding: 0 30px 30px;
         }
         
-        .service-content p {
-            margin-bottom: 20px;
-            color: #666;
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        
+        .service-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
             line-height: 1.6;
         }
         
-        .service-list {
+        .service-features {
             list-style: none;
         }
         
-        .service-list li {
+        .service-features li {
+            color: rgba(255, 255, 255, 0.8);
             padding: 8px 0;
-            border-bottom: 1px solid #ecf0f1;
-            color: #555;
-            position: relative;
-            padding-left: 20px;
-        }
-        
-        .service-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .service-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-        
-        .credentials-section {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .credentials-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .credentials-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-        
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .credential-item {
-            padding: 25px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .credential-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: #3498db;
-        }
-        
-        .credential-item p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-        
-        .license-section {
-            background: white;
-            padding: 50px;
-            margin: 50px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .license-section h3 {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        
-        .license-numbers {
             display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            color: var(--primary-gold);
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
+            font-size: 0.8rem;
+        }
+        
+        /* Portfolio Showcase */
+        .portfolio-section {
+            background: var(--primary-dark);
+            padding: 120px 0;
+            overflow: hidden;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .portfolio-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 300px;
+        }
+        
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.8) 0%, rgba(26, 26, 26, 0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .portfolio-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        }
+        
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        
+        .portfolio-category {
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            padding: 120px 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-size: 6rem;
+            color: var(--primary-gold);
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-intense);
+        }
+        
+        .testimonial-text {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+        
+        .author-info h4 {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .author-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-gold);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(0,0,0,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.3rem;
+            color: rgba(26, 26, 26, 0.8);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
             flex-wrap: wrap;
         }
         
-        .license-item {
-            background: #ecf0f1;
-            padding: 20px 30px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .license-item strong {
-            display: block;
-            color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-        
-        .why-choose-section {
-            background: #ecf0f1;
-            padding: 60px 0;
-        }
-        
-        .why-choose-content {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .why-choose-content h2 {
-            font-size: 2.2rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .benefit-item {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .benefit-item h4 {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-item p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        .cta-section {
-            background: #27ae60;
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .cta-content h3 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .cta-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: #2c3e50;
-            color: white;
-            padding: 15px 40px;
+        .btn-dark {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 18px 36px;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 5px;
+            font-weight: 700;
             font-size: 1.1rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            border: 2px solid #2c3e50;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-subtle);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .cta-button:hover {
-            background: transparent;
-            border-color: white;
+        .btn-dark:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-intense);
         }
         
+        /* Footer */
         .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 40px 0 20px;
+            background: var(--primary-dark);
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--glass-border);
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
         
         .footer-section h4 {
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 20px;
             font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: #3498db;
         }
         
         .footer-section p, .footer-section li {
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
-            opacity: 0.9;
+            margin-bottom: 12px;
         }
         
         .footer-section ul {
             list-style: none;
         }
         
-        .footer-section ul li {
-            margin-bottom: 8px;
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary-gold);
         }
         
         .footer-bottom {
-            border-top: 1px solid #34495e;
-            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 30px;
             text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            color: rgba(255, 255, 255, 0.5);
         }
         
-        .cookie-notice {
-            background: #34495e;
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-            font-size: 0.9rem;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .header-content {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-cta-group {
                 flex-direction: column;
-                text-align: center;
+                align-items: stretch;
             }
             
-            .contact-info {
-                text-align: center;
-                margin-top: 15px;
+            .btn-primary, .btn-secondary {
+                justify-content: center;
             }
             
-            .hero-content h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-features {
-                flex-direction: column;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
             }
             
-            .intro-section, .license-section {
-                padding: 30px 20px;
+            .services-grid {
+                grid-template-columns: 1fr;
             }
             
-            .license-numbers {
-                flex-direction: column;
-                gap: 20px;
+            .portfolio-grid {
+                grid-template-columns: 1fr;
             }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-header {
+                margin-bottom: 60px;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div>
-                    <h1>Garcia and Pena General Contracting</h1>
-                    <p class="tagline">Quality Workmanship at Competitive Rates</p>
-                </div>
-                <div class="contact-info">
-                    <div><strong>Free Estimates</strong></div>
-                    <div>Licensed & Insured</div>
-                    <div>Call Today: (555) 123-4567</div>
-                </div>
-            </div>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="logo">Garcia & Pena</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="cta-nav">Get Quote</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <section class="hero-section">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2>Professional General Contracting Services</h2>
-                <p>Serving residential and commercial clients with over 15 years of experience. When you want quality updates made to your property, get in touch with our reputable team.</p>
-                
-                <div class="hero-features">
-                    <div class="hero-feature">
-                        <h4>Free Estimates</h4>
-                        <p>No obligation consultations</p>
-                    </div>
-                    <div class="hero-feature">
-                        <h4>Owner on Every Job</h4>
-                        <p>Direct supervision & quality control</p>
-                    </div>
-                    <div class="hero-feature">
-                        <h4>Insurance Claims</h4>
-                        <p>We work with insurance companies</p>
-                    </div>
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    Award-Winning Excellence Since 2008
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="main-content">
-        <div class="container">
-            <div class="intro-section">
-                <h2>Trusted General Contractors Since 2008</h2>
-                <p class="intro-text">
-                    When it comes to improvements and renovations for your property, Garcia and Pena General Contracting is your trusted name for all residential and commercial contracting needs. With more than 15 years of experience, residents and business owners continue to hire our team of experts time and time again. We provide superior service and pay close attention to detail that you won't find anywhere else.
+                <h1>Building Dreams Into Reality</h1>
+                <p class="hero-subtitle">
+                    Premium construction and remodeling services that exceed expectations. 
+                    From concept to completion, we deliver unmatched quality and craftsmanship.
                 </p>
-            </div>
-
-            <section class="services-section">
-                <h2 class="section-title">Our Professional Services</h2>
-                
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h3>Kitchen Remodeling</h3>
-                        </div>
-                        <div class="service-content">
-                            <p>Get the kitchen of your dreams with our expert remodeling services. Whether it's minor changes or a complete renovation, our team ensures every detail is completed to your satisfaction.</p>
-                            <ul class="service-list">
-                                <li>Custom Cabinet Installation</li>
-                                <li>Countertop Replacement</li>
-                                <li>Flooring Updates</li>
-                                <li>Plumbing & Electrical Work</li>
-                                <li>Complete Kitchen Renovations</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h3>Bathroom Remodeling</h3>
-                        </div>
-                        <div class="service-content">
-                            <p>Increase your bathroom's beauty and functionality. From small updates to total remodeling projects, our expert contractors complete every project at fair and honest pricing.</p>
-                            <ul class="service-list">
-                                <li>Tile Installation & Repair</li>
-                                <li>Vanity & Fixture Updates</li>
-                                <li>Shower & Tub Replacement</li>
-                                <li>Bathroom Additions</li>
-                                <li>ADA Compliance Modifications</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h3>Basement Finishing</h3>
-                        </div>
-                        <div class="service-content">
-                            <p>Expand your living space with professional basement refinishing. Your basement can become whatever you dream of with our experienced remodeling services.</p>
-                            <ul class="service-list">
-                                <li>Drywall Installation</li>
-                                <li>Flooring Solutions</li>
-                                <li>Electrical & Lighting</li>
-                                <li>Insulation & Moisture Control</li>
-                                <li>Complete Basement Renovations</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h3>Commercial Construction</h3>
-                        </div>
-                        <div class="service-content">
-                            <p>Professional commercial construction and renovation services for businesses. We handle projects of all sizes with attention to deadlines and minimal disruption.</p>
-                            <ul class="service-list">
-                                <li>Office Build-Outs</li>
-                                <li>Retail Space Construction</li>
-                                <li>Restaurant Renovations</li>
-                                <li>Warehouse Improvements</li>
-                                <li>ADA Compliance Updates</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </section>
-
-    <section class="credentials-section">
-        <div class="container">
-            <div class="credentials-content">
-                <h2>Licensed, Bonded & Insured Professionals</h2>
-                <p>Your project is protected with our comprehensive licensing and insurance coverage</p>
-                
-                <div class="credentials-grid">
-                    <div class="credential-item">
-                        <h4>Professional Memberships</h4>
-                        <p>Associated General Contractors<br>
-                        National Association of Home Builders<br>
-                        Better Business Bureau A+ Rating</p>
-                    </div>
-                    <div class="credential-item">
-                        <h4>Quality Assurance</h4>
-                        <p>Fully Licensed & Bonded<br>
-                        Comprehensive Insurance Coverage<br>
-                        5-Year Labor Warranty</p>
-                    </div>
-                    <div class="credential-item">
-                        <h4>Experience</h4>
-                        <p>Over 15 Years in Business<br>
-                        Hundreds of Satisfied Customers<br>
-                        Local References Available</p>
-                    </div>
+                <div class="hero-cta-group">
+                    <a href="#contact" class="btn-primary">
+                        <i class="fas fa-calculator"></i>
+                        Get Free Estimate
+                    </a>
+                    <a href="#portfolio" class="btn-secondary">
+                        <i class="fas fa-play"></i>
+                        View Our Work
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="license-section">
+    <!-- Stats Section -->
+    <section class="stats-section">
         <div class="container">
-            <h3>State Licensing Information</h3>
-            <p>Properly licensed to serve clients across multiple states</p>
-            <div class="license-numbers">
-                <div class="license-item">
-                    <strong>New York State License</strong>
-                    #NY-2024-8856432
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Projects Completed</span>
                 </div>
-                <div class="license-item">
-                    <strong>Connecticut State License</strong>
-                    #CT-7749821
+                <div class="stat-item fade-in">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+                <div class="stat-item fade-in">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Customer Support</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="why-choose-section">
+    <!-- Services Section -->
+    <section class="services-section" id="services">
         <div class="container">
-            <div class="why-choose-content">
-                <h2>Why Choose Garcia and Pena General Contracting</h2>
-                <p>We combine industry expertise with premium materials and unwavering dedication to deliver outstanding results</p>
+            <div class="section-header fade-in">
+                <div class="section-badge">Our Expertise</div>
+                <h2 class="section-title">Premium Construction Services</h2>
+                <p class="section-subtitle">From luxury renovations to commercial construction, we bring expertise and innovation to every project</p>
             </div>
             
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <h4>Fair & Honest Pricing</h4>
-                    <p>Transparent estimates with no hidden costs. We provide competitive rates for all contracting projects.</p>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Luxury Kitchen Remodeling</h3>
+                        <p class="service-description">Transform your kitchen into a culinary masterpiece with our premium remodeling services featuring top-tier materials and innovative designs.</p>
+                        <ul class="service-features">
+                            <li>Custom Cabinet Design & Installation</li>
+                            <li>Premium Countertop Solutions</li>
+                            <li>Smart Home Integration</li>
+                            <li>High-End Appliance Installation</li>
+                            <li>Luxury Flooring Systems</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="benefit-item">
-                    <h4>Owner-Operated Business</h4>
-                    <p>Direct communication with ownership ensures quality control on every project from start to finish.</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Experienced Team</h4>
-                    <p>Over 15 years of experience with skilled craftsmen who take pride in their workmanship.</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Customer Satisfaction</h4>
-                    <p>We maintain open communication and keep you updated on progress throughout your project.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h3>Ready to Start Your Project?</h3>
-                <p>Contact us today for a free estimate. We'll work with you to ensure our services fit within your budget.</p>
-                <a href="#contact" class="cta-button">Get Your Free Estimate</a>
-            </div>
-        </div>
-    </section>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-bath"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Spa-Style Bathroom Renovations</h3>
+                        <p class="service-description">Create your personal oasis with luxurious bathroom renovations that combine comfort, functionality, and stunning aesthetics.</p>
+                        <ul class="service-features">
+                            <li>Custom Tile & Stone Work</li>
+                            <li>Luxury Fixture Installation</li>
+                            <li>Walk-in Shower Systems</li>
+                            <li>Heated Flooring Solutions</li>
+                            <li>Smart Mirror Technology</li>
+                        </ul>
+                    </div>
+                </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Garcia and Pena General Contracting</h4>
-                    <p>Professional construction services for residential and commercial clients throughout New York and Connecticut.</p>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Commercial Construction</h3>
+                        <p class="service-description">Professional commercial construction services for businesses seeking quality, efficiency, and innovative design solutions.</p>
+                        <ul class="service-features">
+                            <li>Office Space Design & Build</li>
+                            <li>Retail Environment Construction</li>
+                            <li>Restaurant & Hospitality Projects</li>
+                            <li>Warehouse & Industrial Facilities</li>
+                            <li>ADA Compliance Solutions</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li>Kitchen Remodeling</li>
-                        <li>Bathroom Renovations</li>
-                        <li>Basement Finishing</li>
-                        <li>Commercial Construction</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Information</h4>
-                    <p>Phone: (555) 123-4567<br>
-                    Email: info@garciapenagc.com<br>
-                    Free estimates available</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Garcia and Pena General Contracting - All Rights Reserved</p>
-            </div>
-        </div>
-    </footer>
 
-    <div class="cookie-notice">
-        <div class="container">
-            <p>We use cookies to enhance your browsing experience and analyze website traffic. By continuing to use this site, you consent to our use of cookies.</p>
-        </div>
-    </div>
-</body>
-</html>
+                <div class="service-card fade-in">
