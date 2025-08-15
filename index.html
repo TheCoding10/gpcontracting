@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -18,8 +18,18 @@
     /* Navigation */
     .navbar { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 1000; transition: all 0.3s ease; padding: 0; }
     .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.4rem; font-weight: 800; color: #2c3e50; text-decoration: none; transition: transform 0.3s ease; letter-spacing: 0.5px; }
-    .logo:hover { transform: scale(1.05); }
+
+    /* UPDATED: logo styles for image */
+    .logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .logo img {
+      height: 50px;            /* tweak size here if you want */
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 1px 6px rgba(0,0,0,0.12));
+      transition: transform .2s ease;
+    }
+    .logo:hover img { transform: scale(1.05); }
+
     .nav-menu { display: flex; list-style: none; gap: 24px; align-items: center; }
     .nav-link { color: #333; text-decoration: none; font-weight: 600; transition: all 0.3s ease; position: relative; padding: 8px 0; }
     .nav-link:hover, .nav-link.active { color: #e67e22; }
@@ -140,6 +150,7 @@
       .nav-menu { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.98); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 12px 20px 18px; }
       .nav-menu.open { display: flex; }
       .mobile-menu { display: inline-block; }
+      .logo img { height: 44px; }
     }
   </style>
 </head>
@@ -147,7 +158,11 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#home" class="logo">Garcia &amp; Pena Construction</a>
+      <!-- UPDATED: image logo -->
+      <a href="#home" class="logo" aria-label="Garcia & Peña">
+        <img src="garcia.png" alt="Garcia & Peña">
+      </a>
+
       <button class="mobile-menu" id="mobileToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
       <ul class="nav-menu" id="navMenu">
         <li><a class="nav-link" href="#about">About</a></li>
@@ -183,10 +198,10 @@
     <div class="container about-content">
       <div class="about-text">
         <h2>Built on Craft, Integrity, and Service</h2>
-        <p>We’re a local team serving Rhode Island and Massachusetts, specializing in high‑quality renovations and new construction. From design to punch list, we keep communication clear and timelines tight.</p>
+        <p>We’re a local team serving Rhode Island and Massachusetts, specializing in high-quality renovations and new construction. From design to punch list, we keep communication clear and timelines tight.</p>
         <div class="about-features">
           <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-shield"></i></div><div class="feature-text">Licensed • Insured • Warranty</div></div>
-          <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-ruler-combined"></i></div><div class="feature-text">Design‑Assist &amp; Permitting</div></div>
+          <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-ruler-combined"></i></div><div class="feature-text">Design-Assist &amp; Permitting</div></div>
           <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-people-carry-box"></i></div><div class="feature-text">Clean, Respectful Crews</div></div>
           <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-sack-dollar"></i></div><div class="feature-text">Transparent Pricing</div></div>
         </div>
@@ -201,7 +216,7 @@
       <div class="section-header">
         <span class="section-badge">Our Services</span>
         <h3 class="section-title">Residential &amp; Commercial Construction</h3>
-        <p class="section-subtitle">Full‑service remodeling, additions, and new builds with meticulous attention to detail.</p>
+        <p class="section-subtitle">Full-service remodeling, additions, and new builds with meticulous attention to detail.</p>
       </div>
 
       <div class="services-grid">
@@ -234,13 +249,13 @@
           <ul class="service-features">
             <li>Structural framing</li>
             <li>Decks &amp; porches</li>
-            <li>Built‑ins &amp; trim</li>
+            <li>Built-ins &amp; trim</li>
           </ul>
         </div>
 
         <div class="service-card">
           <div class="service-icon"><i class="fa-solid fa-city"></i></div>
-          <h4 class="service-title">Commercial Build‑Outs</h4>
+          <h4 class="service-title">Commercial Build-Outs</h4>
           <p class="service-description">Restaurants, offices, and retail spaces delivered on schedule.</p>
           <ul class="service-features">
             <li>Permit &amp; code coordination</li>
@@ -266,7 +281,7 @@
           <div class="portfolio-content">
             <div class="portfolio-category">Kitchen</div>
             <h4 class="portfolio-title">East Side Full Remodel</h4>
-            <p class="portfolio-description">Open‑concept layout with custom cabinetry and quartz waterfall island.</p>
+            <p class="portfolio-description">Open-concept layout with custom cabinetry and quartz waterfall island.</p>
           </div>
         </article>
         <article class="portfolio-item" tabindex="0">
@@ -274,14 +289,14 @@
           <div class="portfolio-content">
             <div class="portfolio-category">Bathroom</div>
             <h4 class="portfolio-title">Spa Bath in Cranston</h4>
-            <p class="portfolio-description">Curbless shower, large‑format tile, and heated floors.</p>
+            <p class="portfolio-description">Curbless shower, large-format tile, and heated floors.</p>
           </div>
         </article>
         <article class="portfolio-item" tabindex="0">
           <div class="portfolio-image"><i class="fa-solid fa-images"></i></div>
           <div class="portfolio-content">
             <div class="portfolio-category">Commercial</div>
-            <h4 class="portfolio-title">Downtown Restaurant Build‑Out</h4>
+            <h4 class="portfolio-title">Downtown Restaurant Build-Out</h4>
             <p class="portfolio-description">Full MEP coordination and custom millwork seating.</p>
           </div>
         </article>
@@ -295,7 +310,7 @@
       <div class="section-header">
         <span class="section-badge">Happy Clients</span>
         <h3 class="section-title">What People Say</h3>
-        <p class="section-subtitle">We build long‑term relationships through dependable quality.</p>
+        <p class="section-subtitle">We build long-term relationships through dependable quality.</p>
       </div>
       <div class="testimonials-grid">
         <div class="testimonial-card">
@@ -322,7 +337,7 @@
           <div class="testimonial-rating">
             <i class="fa-solid fa-star star"></i><i class="fa-solid fa-star star"></i><i class="fa-solid fa-star star"></i><i class="fa-solid fa-star star"></i><i class="fa-solid fa-star star"></i>
           </div>
-          <p class="testimonial-text">“They handled our restaurant build‑out on a tight timeline—highly recommend.”</p>
+          <p class="testimonial-text">“They handled our restaurant build-out on a tight timeline—highly recommend.”</p>
           <div class="testimonial-author">
             <div class="author-avatar">SR</div>
             <div class="author-info"><h4>Sam R.</h4><p>Fall River, MA</p></div>
@@ -352,7 +367,7 @@
           </div>
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 555‑5555" />
+            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" />
           </div>
           <div class="form-group">
             <label for="service">Service</label>
@@ -360,7 +375,7 @@
               <option>Kitchen Remodel</option>
               <option>Bathroom Renovation</option>
               <option>Additions / Carpentry</option>
-              <option>Commercial Build‑Out</option>
+              <option>Commercial Build-Out</option>
               <option>Other</option>
             </select>
           </div>
@@ -373,7 +388,7 @@
 
         <aside class="contact-info">
           <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div>Rhode Island &amp; Massachusetts</div></div>
-          <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+14010000000">(401) 000‑0000</a></div>
+          <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+14010000000">(401) 000-0000</a></div>
           <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:hello@gpconstruction.com">hello@gpconstruction.com</a></div>
           <div class="contact-item"><i class="fa-brands fa-instagram"></i><a href="#">@gp.construction</a></div>
         </aside>
