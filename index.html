@@ -113,6 +113,19 @@
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             padding: 4rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230,126,34,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
         }
 
         .hero-content {
@@ -121,6 +134,8 @@
             justify-content: space-between;
             gap: 3rem;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-text {
@@ -128,17 +143,48 @@
             min-width: 300px;
         }
 
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(230,126,34,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
             color: #e67e22;
             font-weight: 900;
+            background: linear-gradient(135deg, #e67e22, #f39c12, #e67e22);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             color: #555;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .hero-logo {
@@ -146,13 +192,316 @@
             min-width: 300px;
             display: flex;
             justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
         .hero-logo img {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-logo img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Trust Indicators */
+        .trust-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .trust-item {
+            background: white;
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .trust-item:hover {
+            transform: translateY(-5px);
+            border-color: #e67e22;
+        }
+
+        .trust-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #e67e22;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Awards Section */
+        .awards-section {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .awards-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #f39c12, #e67e22);
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .award-item {
+            text-align: center;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .award-item:hover {
+            transform: scale(1.05);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .award-text {
+            font-weight: 700;
+            color: #e67e22;
+            font-size: 0.9rem;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 15px;
+        }
+
+        .emergency-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: sweep 3s infinite;
+        }
+
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .emergency-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .emergency-icon {
+            font-size: 1.5rem;
+            animation: flash 1s infinite alternate;
+        }
+
+        @keyframes flash {
+            0% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Video Section */
+        .video-section {
+            background: #2c3e50;
+            color: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .video-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #f39c12;
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        /* Process Preview */
+        .process-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .process-step-mini {
+            background: white;
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-step-mini::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .process-step-mini:hover::before {
+            transform: scaleX(1);
+        }
+
+        .process-step-mini:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .step-number-mini {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title-mini {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        /* Guarantee Section */
+        .guarantee-section {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 3rem;
+            margin: 3rem 0;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guarantee-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        .guarantee-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .guarantee-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .guarantee-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .cta-button {
@@ -563,6 +912,9 @@
                 <div class="container">
                     <div class="hero-content fade-in">
                         <div class="hero-text">
+                            <div class="hero-badge">
+                                🏆 Licensed & Insured • RI & MA
+                            </div>
                             <h1>Premium General Contracting</h1>
                             <p>Transform your space with expert kitchen & bath renovations, seamless additions, and professional commercial build-outs. Over 15 years of excellence in Rhode Island & Massachusetts.</p>
                             <a href="#" onclick="showPage('contact')" class="cta-button">Get Free Quote</a>
@@ -570,6 +922,137 @@
                         </div>
                         <div class="hero-logo">
                             <img src="garcia.png" alt="Garcia & Peña General Contracting" />
+                        </div>
+                    </div>
+                    
+                    <!-- Trust Indicators -->
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <div class="trust-icon">📊</div>
+                            <span class="trust-number">100+</span>
+                            <div class="trust-label">Projects Completed</div>
+                        </div>
+                        <div class="trust-item">
+                            <div class="trust-icon">⭐</div>
+                            <span class="trust-number">15+</span>
+                            <div class="trust-label">Years Experience</div>
+                        </div>
+                        <div class="trust-item">
+                            <div class="trust-icon">😊</div>
+                            <span class="trust-number">98%</span>
+                            <div class="trust-label">Client Satisfaction</div>
+                        </div>
+                        <div class="trust-item">
+                            <div class="trust-icon">💰</div>
+                            <span class="trust-number">$100K+</span>
+                            <div class="trust-label">Projects Value</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Banner -->
+            <section class="emergency-banner">
+                <div class="container">
+                    <div class="emergency-content">
+                        <div class="emergency-icon">🚨</div>
+                        <div>
+                            <strong>24/7 Emergency Services Available</strong> - 
+                            Water damage, structural issues, and urgent repairs
+                        </div>
+                        <a href="tel:+14010000000" class="cta-button" style="margin: 0; padding: 8px 16px; font-size: 0.9rem;">Emergency Hotline</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Awards Section -->
+            <section class="awards-section">
+                <div class="container">
+                    <h3 style="text-align: center; margin-bottom: 2rem; color: #e67e22; font-size: 1.5rem;">Our Commitment to Quality</h3>
+                    <div class="awards-grid">
+                        <div class="award-item">
+                            <div class="award-icon">🔨</div>
+                            <div class="award-text">Premium<br>Craftsmanship</div>
+                        </div>
+                        <div class="award-item">
+                            <div class="award-icon">⏰</div>
+                            <div class="award-text">On-Time<br>Delivery</div>
+                        </div>
+                        <div class="award-item">
+                            <div class="award-icon">📜</div>
+                            <div class="award-text">Fully Licensed<br>& Insured</div>
+                        </div>
+                        <div class="award-item">
+                            <div class="award-icon">⚡</div>
+                            <div class="award-text">EPA Certified<br>Lead-Safe Firm</div>
+                        </div>
+                        <div class="award-item">
+                            <div class="award-icon">🌟</div>
+                            <div class="award-text">Superior<br>Customer Service</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Section -->
+            <section class="video-section">
+                <div class="container">
+                    <div class="video-content">
+                        <div class="video-text">
+                            <h3>See Our Craftsmanship in Action</h3>
+                            <p>Watch how we transform spaces with precision, care, and unmatched attention to detail. From concept to completion, every project tells a story of excellence.</p>
+                            <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                                <li style="margin: 0.5rem 0;">✓ Behind-the-scenes process</li>
+                                <li style="margin: 0.5rem 0;">✓ Client testimonial interviews</li>
+                                <li style="margin: 0.5rem 0;">✓ Before & after transformations</li>
+                                <li style="margin: 0.5rem 0;">✓ Quality control procedures</li>
+                            </ul>
+                        </div>
+                        <div class="video-placeholder" onclick="alert('Video would play here - showcasing completed projects and client testimonials')">
+                            ▶️
+                            <div style="position: absolute; bottom: 1rem; left: 1rem; font-size: 1rem; opacity: 0.9;">
+                                Watch Our Story
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process Preview -->
+            <section class="container">
+                <h2 style="text-align: center; margin-bottom: 1rem; color: #e67e22;">Our Proven 4-Step Process</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">From initial consultation to final walkthrough, we ensure every detail is perfect</p>
+                <div class="process-preview">
+                    <div class="process-step-mini">
+                        <div class="step-number-mini">1</div>
+                        <div class="step-title-mini">Consultation & Design</div>
+                    </div>
+                    <div class="process-step-mini">
+                        <div class="step-number-mini">2</div>
+                        <div class="step-title-mini">Planning & Permits</div>
+                    </div>
+                    <div class="process-step-mini">
+                        <div class="step-number-mini">3</div>
+                        <div class="step-title-mini">Expert Construction</div>
+                    </div>
+                    <div class="process-step-mini">
+                        <div class="step-number-mini">4</div>
+                        <div class="step-title-mini">Final Inspection</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Guarantee Section -->
+            <section class="guarantee-section">
+                <div class="container">
+                    <div class="guarantee-content">
+                        <div class="guarantee-icon">🛡️</div>
+                        <h3 class="guarantee-title">100% Satisfaction Guarantee</h3>
+                        <p class="guarantee-text">We stand behind every project with our comprehensive warranty and satisfaction guarantee. If you're not completely happy, we'll make it right - that's our promise to you.</p>
+                        <div style="margin-top: 2rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; font-size: 0.9rem;">
+                            <div>✓ 2-Year Craftsmanship Warranty</div>
+                            <div>✓ Licensed & Bonded</div>
+                            <div>✓ Quality Workmanship Guarantee</div>
                         </div>
                     </div>
                 </div>
