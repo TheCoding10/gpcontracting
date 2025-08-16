@@ -1,801 +1,805 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Garcia & Peña General Contracting</title>
-  <meta name="description" content="Premium general contracting in Rhode Island & Massachusetts: renovations, additions, and commercial build-outs."/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-    :root{
-      --primary:#e67e22; --primary-dark:#d35400; --secondary:#f39c12;
-      --text:#2c3e50; --text-light:#7f8c8d; --bg:#ffffff; --bg-light:#f8f9fa;
-      --border:#e9ecef; --shadow:0 10px 30px rgba(0,0,0,0.1);
-      --container:1200px; --nav-h:80px;
-    }
-    
-    *{box-sizing:border-box; margin:0; padding:0}
-    body{
-      font-family:Inter,system-ui,sans-serif; color:var(--text);
-      background:var(--bg); line-height:1.6; font-size:16px;
-    }
-    
-    .container{max-width:var(--container); margin:0 auto; padding:0 20px}
-    
-    /* HEADER */
-    .header{
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      background:rgba(255,255,255,0.95); backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border); height:var(--nav-h);
-    }
-    
-    .nav{
-      height:100%; display:flex; align-items:center; justify-content:space-between;
-    }
-    
-    .logo{
-      display:flex; align-items:center; gap:15px; text-decoration:none;
-    }
-    
-    .logo img{
-      height:50px; width:auto;
-    }
-    
-    .logo-text{
-      font-size:1.5rem; font-weight:800; color:var(--primary);
-    }
-    
-    .logo-subtitle{
-      font-size:0.8rem; color:var(--text-light); font-weight:500;
-      text-transform:uppercase; letter-spacing:1px;
-    }
-    
-    .nav-menu{
-      display:flex; list-style:none; gap:40px; align-items:center;
-    }
-    
-    .nav-menu a{
-      text-decoration:none; color:var(--text); font-weight:500;
-      padding:10px 0; position:relative; transition:color 0.3s;
-    }
-    
-    .nav-menu a:hover, .nav-menu a.active{
-      color:var(--primary);
-    }
-    
-    .nav-menu a::after{
-      content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
-      background:var(--primary); transition:width 0.3s;
-    }
-    
-    .nav-menu a:hover::after, .nav-menu a.active::after{
-      width:100%;
-    }
-    
-    .menu-toggle{
-      display:none; background:none; border:none; font-size:1.5rem;
-      color:var(--text); cursor:pointer;
-    }
-    
-    /* MAIN CONTENT */
-    main{
-      padding-top:var(--nav-h);
-    }
-    
-    .page{
-      display:none; opacity:0; transform:translateY(20px);
-      transition:all 0.5s ease; padding:60px 0;
-    }
-    
-    .page.active{display:block}
-    .page.show{opacity:1; transform:translateY(0)}
-    
-    /* HERO SECTION */
-    .hero{
-      background:linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color:white; padding:100px 0; position:relative; overflow:hidden;
-    }
-    
-    .hero::before{
-      content:''; position:absolute; top:0; right:0; width:50%; height:100%;
-      background:url('garcia.png') no-repeat center/contain;
-      opacity:0.1; z-index:1;
-    }
-    
-    .hero-content{
-      position:relative; z-index:2; max-width:600px;
-    }
-    
-    .hero-badge{
-      display:inline-block; background:var(--primary); color:white;
-      padding:8px 20px; border-radius:25px; font-size:0.9rem;
-      font-weight:600; margin-bottom:30px;
-    }
-    
-    .hero h1{
-      font-size:clamp(2.5rem, 5vw, 4rem); font-weight:900;
-      margin-bottom:25px; line-height:1.1;
-    }
-    
-    .hero p{
-      font-size:1.2rem; color:rgba(255,255,255,0.9);
-      margin-bottom:40px; line-height:1.6;
-    }
-    
-    .hero-buttons{
-      display:flex; gap:20px; flex-wrap:wrap;
-    }
-    
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:15px 30px; border-radius:8px; text-decoration:none;
-      font-weight:600; transition:all 0.3s; border:none; cursor:pointer;
-    }
-    
-    .btn-primary{
-      background:var(--primary); color:white;
-      box-shadow:0 5px 15px rgba(230,126,34,0.3);
-    }
-    
-    .btn-primary:hover{
-      background:var(--primary-dark); transform:translateY(-2px);
-      box-shadow:0 8px 25px rgba(230,126,34,0.4);
-    }
-    
-    .btn-secondary{
-      background:transparent; color:white; border:2px solid white;
-    }
-    
-    .btn-secondary:hover{
-      background:white; color:var(--text);
-    }
-    
-    .hero-stats{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-      gap:30px; margin-top:60px;
-    }
-    
-    .stat{
-      text-align:center; padding:20px;
-      background:rgba(255,255,255,0.1); border-radius:10px;
-      backdrop-filter:blur(10px);
-    }
-    
-    .stat-number{
-      display:block; font-size:2.5rem; font-weight:900;
-      color:var(--secondary); margin-bottom:5px;
-    }
-    
-    .stat-label{
-      font-size:0.9rem; opacity:0.9;
-    }
-    
-    /* SECTIONS */
-    .section{
-      padding:80px 0;
-    }
-    
-    .section-alt{
-      background:var(--bg-light);
-    }
-    
-    .section-header{
-      text-align:center; margin-bottom:60px; max-width:800px;
-      margin-left:auto; margin-right:auto;
-    }
-    
-    .section-badge{
-      display:inline-block; background:var(--primary); color:white;
-      padding:6px 15px; border-radius:20px; font-size:0.8rem;
-      font-weight:600; text-transform:uppercase; letter-spacing:1px;
-      margin-bottom:20px;
-    }
-    
-    .section h2{
-      font-size:clamp(2rem, 4vw, 3rem); font-weight:800;
-      margin-bottom:20px; color:var(--text);
-    }
-    
-    .section p{
-      font-size:1.1rem; color:var(--text-light);
-    }
-    
-    /* CARDS GRID */
-    .cards-grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-      gap:30px; margin-top:50px;
-    }
-    
-    .card{
-      background:white; border-radius:15px; padding:40px 30px;
-      box-shadow:var(--shadow); transition:all 0.3s;
-      border:1px solid var(--border); text-align:center;
-    }
-    
-    .card:hover{
-      transform:translateY(-10px); 
-    }
-    
-    .card-icon{
-      width:80px; height:80px; margin:0 auto 25px;
-      background:linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius:20px; display:flex; align-items:center;
-      justify-content:center; font-size:2rem; color:white;
-    }
-    
-    .card h3{
-      font-size:1.4rem; font-weight:700; margin-bottom:15px;
-      color:var(--text);
-    }
-    
-    .card p{
-      color:var(--text-light); margin-bottom:20px;
-    }
-    
-    .card ul{
-      list-style:none; text-align:left;
-    }
-    
-    .card li{
-      color:var(--text-light); margin:8px 0; padding-left:25px;
-      position:relative;
-    }
-    
-    .card li::before{
-      content:'✓'; position:absolute; left:0; color:var(--primary);
-      font-weight:bold;
-    }
-    
-    /* PORTFOLIO GRID */
-    .portfolio-grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
-      gap:30px; margin-top:50px;
-    }
-    
-    .portfolio-item{
-      background:white; border-radius:15px; overflow:hidden;
-      box-shadow:var(--shadow); transition:all 0.3s;
-    }
-    
-    .portfolio-item:hover{
-      transform:translateY(-5px);
-    }
-    
-    .portfolio-image{
-      height:250px; background:linear-gradient(135deg, var(--primary), var(--secondary));
-      display:flex; align-items:center; justify-content:center;
-      font-size:3rem; color:white;
-    }
-    
-    .portfolio-content{
-      padding:25px;
-    }
-    
-    .portfolio-category{
-      color:var(--primary); font-weight:600; font-size:0.9rem;
-      text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;
-    }
-    
-    .portfolio-content h3{
-      font-size:1.3rem; font-weight:700; margin-bottom:10px;
-      color:var(--text);
-    }
-    
-    .portfolio-content p{
-      color:var(--text-light);
-    }
-    
-    /* ABOUT SECTION */
-    .about-content{
-      display:grid; grid-template-columns:1fr 1fr; gap:60px;
-      align-items:center; margin-top:40px;
-    }
-    
-    .about-text h3{
-      font-size:1.6rem; font-weight:700; margin-bottom:20px;
-      color:var(--text);
-    }
-    
-    .about-text p{
-      font-size:1.1rem; color:var(--text-light); margin-bottom:30px;
-    }
-    
-    .features-list{
-      display:grid; grid-template-columns:repeat(2, 1fr); gap:15px;
-    }
-    
-    .feature{
-      display:flex; align-items:center; gap:15px; padding:20px;
-      background:white; border-radius:10px; box-shadow:var(--shadow);
-    }
-    
-    .feature-icon{
-      width:50px; height:50px; background:var(--primary);
-      border-radius:10px; display:flex; align-items:center;
-      justify-content:center; color:white; font-size:1.2rem;
-    }
-    
-    .feature-text{
-      font-weight:600; color:var(--text);
-    }
-    
-    .about-visual{
-      background:linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius:20px; height:400px; display:flex;
-      align-items:center; justify-content:center; color:white;
-      font-size:5rem;
-    }
-    
-    /* CONTACT SECTION */
-    .contact-content{
-      display:grid; grid-template-columns:1fr 1fr; gap:60px;
-      margin-top:40px;
-    }
-    
-    .contact-form{
-      background:white; padding:40px; border-radius:15px;
-      box-shadow:var(--shadow);
-    }
-    
-    .form-group{
-      margin-bottom:25px;
-    }
-    
-    .form-group label{
-      display:block; font-weight:600; margin-bottom:8px;
-      color:var(--text);
-    }
-    
-    .form-group input, .form-group select, .form-group textarea{
-      width:100%; padding:15px; border:2px solid var(--border);
-      border-radius:8px; font-size:1rem; transition:border-color 0.3s;
-    }
-    
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus{
-      outline:none; border-color:var(--primary);
-    }
-    
-    .form-group textarea{
-      height:120px; resize:vertical;
-    }
-    
-    .contact-info{
-      background:var(--text); color:white; padding:40px;
-      border-radius:15px;
-    }
-    
-    .contact-item{
-      display:flex; align-items:center; gap:20px; margin-bottom:30px;
-    }
-    
-    .contact-icon{
-      width:50px; height:50px; background:var(--primary);
-      border-radius:10px; display:flex; align-items:center;
-      justify-content:center; font-size:1.2rem;
-    }
-    
-    .contact-item a{
-      color:white; text-decoration:none; font-weight:500;
-    }
-    
-    .contact-item a:hover{
-      color:var(--secondary);
-    }
-    
-    /* FOOTER */
-    .footer{
-      background:var(--text); color:white; padding:40px 0;
-    }
-    
-    .footer-content{
-      display:flex; justify-content:space-between; align-items:center;
-      flex-wrap:wrap; gap:20px;
-    }
-    
-    .footer-links{
-      display:flex; gap:30px; flex-wrap:wrap;
-    }
-    
-    .footer-links a{
-      color:rgba(255,255,255,0.8); text-decoration:none;
-      transition:color 0.3s;
-    }
-    
-    .footer-links a:hover{
-      color:white;
-    }
-    
-    /* RESPONSIVE */
-    @media (max-width: 768px){
-      .menu-toggle{display:block}
-      
-      .nav-menu{
-        position:absolute; top:100%; left:0; right:0;
-        background:white; flex-direction:column; gap:0;
-        box-shadow:var(--shadow); display:none; padding:20px 0;
-      }
-      
-      .nav-menu.open{display:flex}
-      
-      .nav-menu a{
-        padding:15px 20px; width:100%; text-align:center;
-      }
-      
-      .hero{padding:60px 0}
-      .hero-buttons{justify-content:center}
-      .hero-stats{grid-template-columns:1fr}
-      
-      .about-content, .contact-content{
-        grid-template-columns:1fr; gap:40px;
-      }
-      
-      .features-list{grid-template-columns:1fr}
-      
-      .footer-content{
-        flex-direction:column; text-align:center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garcia & Peña General Contracting - Premium Construction Services in RI & MA</title>
+    <meta name="description" content="Professional general contracting services in Rhode Island and Massachusetts. Kitchen remodeling, bathroom renovations, home additions, and commercial build-outs. Licensed, insured, and trusted.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #f39c12;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: pageSlideIn 0.5s ease-out;
+        }
+
+        @keyframes pageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #e67e22;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .hero-logo {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-logo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+
+        .call-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            margin-left: 1rem;
+        }
+
+        .call-button:hover {
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #e67e22;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #e67e22;
+            font-weight: 800;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .company-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #e67e22;
+            margin-bottom: 1rem;
+        }
+
+        /* Services Detail */
+        .services-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .service-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-category h3 {
+            color: #e67e22;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        /* Portfolio Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #e67e22, #3498db);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .testimonial:before {
+            content: '"';
+            font-size: 4rem;
+            color: #e67e22;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+        }
+
+        .stars {
+            color: #FFD700;
+            margin: 1rem 0;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #e67e22;
+            margin-top: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #f39c12;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #d35400;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .services-section,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .call-button {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container">
-      <nav class="nav">
-        <a href="#/home" class="logo" data-link>
-          <img src="garcia.png" alt="Garcia & Peña Logo">
-          <div>
-            <div class="logo-text">Garcia & Peña</div>
-            <div class="logo-subtitle">General Contracting</div>
-          </div>
-        </a>
-        
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#/home" class="nav-link" data-link>Home</a></li>
-          <li><a href="#/about" class="nav-link" data-link>About</a></li>
-          <li><a href="#/services" class="nav-link" data-link>Services</a></li>
-          <li><a href="#/portfolio" class="nav-link" data-link>Portfolio</a></li>
-          <li><a href="#/contact" class="nav-link" data-link>Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- HOME PAGE -->
-    <section id="home" class="page active show">
-      <div class="hero">
-        <div class="container">
-          <div class="hero-content">
-            <span class="hero-badge">Licensed & Insured • RI & MA</span>
-            <h1>Premium General Contracting</h1>
-            <p>With over 15 years of experience, Garcia & Peña is a leader in the construction and design industry, recognized for excellence and innovation in residential and commercial projects.</p>
-            <div class="hero-buttons">
-              <a href="#/services" class="btn btn-primary" data-link>
-                Our Services
-                <span>→</span>
-              </a>
-              <a href="#/contact" class="btn btn-secondary" data-link>
-                Get Quote
-              </a>
-            </div>
-            <div class="hero-stats">
-              <div class="stat">
-                <span class="stat-number">250+</span>
-                <span class="stat-label">Projects Completed</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">15</span>
-                <span class="stat-label">Years Experience</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">98%</span>
-                <span class="stat-label">Client Satisfaction</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT PAGE -->
-    <section id="about" class="page">
-      <div class="section">
-        <div class="container">
-          <div class="section-header">
-            <span class="section-badge">About Us</span>
-            <h2>Excellence in Construction & Design</h2>
-            <p>Delivering premium quality construction services across Rhode Island and Massachusetts with unmatched craftsmanship and professional integrity.</p>
-          </div>
-          
-          <div class="about-content">
-            <div class="about-text">
-              <h3>Your Vision, Our Expertise</h3>
-              <p>Garcia & Peña General Contracting has been transforming spaces for over 15 years. Our commitment to quality, innovation, and client satisfaction has made us a trusted partner for residential and commercial construction projects.</p>
-              <p>From initial design concepts to final construction, we manage every aspect of your project with precision and care, ensuring exceptional results that exceed expectations.</p>
-              
-              <div class="features-list">
-                <div class="feature">
-                  <div class="feature-icon">🛡️</div>
-                  <div class="feature-text">Licensed & Insured</div>
-                </div>
-                <div class="feature">
-                  <div class="feature-icon">⭐</div>
-                  <div class="feature-text">Premium Quality</div>
-                </div>
-                <div class="feature">
-                  <div class="feature-icon">🕒</div>
-                  <div class="feature-text">On-Time Delivery</div>
-                </div>
-                <div class="feature">
-                  <div class="feature-icon">💯</div>
-                  <div class="feature-text">Satisfaction Guaranteed</div>
-                </div>
-              </div>
-            </div>
-            <div class="about-visual">
-              🏗️
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES PAGE -->
-    <section id="services" class="page">
-      <div class="section section-alt">
-        <div class="container">
-          <div class="section-header">
-            <span class="section-badge">Our Services</span>
-            <h2>Comprehensive Construction Solutions</h2>
-            <p>From residential renovations to commercial build-outs, we deliver exceptional results with attention to detail and professional craftsmanship.</p>
-          </div>
-          
-          <div class="cards-grid">
-            <div class="card">
-              <div class="card-icon">🍽️</div>
-              <h3>Kitchen Remodeling</h3>
-              <p>Transform your kitchen with custom cabinetry, premium countertops, and modern appliances.</p>
-              <ul>
-                <li>Custom cabinet design & installation</li>
-                <li>Countertop fabrication & installation</li>
-                <li>Complete electrical & plumbing</li>
-                <li>Modern appliance integration</li>
-              </ul>
-            </div>
-            
-            <div class="card">
-              <div class="card-icon">🛁</div>
-              <h3>Bathroom Renovation</h3>
-              <p>Create luxurious spa-like bathrooms with premium finishes and expert craftsmanship.</p>
-              <ul>
-                <li>Complete bathroom remodeling</li>
-                <li>Tile work & waterproofing</li>
-                <li>Custom vanities & storage</li>
-                <li>Accessible design options</li>
-              </ul>
-            </div>
-            
-            <div class="card">
-              <div class="card-icon">🏠</div>
-              <h3>Home Additions</h3>
-              <p>Expand your living space with seamless additions that match your home's architecture.</p>
-              <ul>
-                <li>Room additions & extensions</li>
-                <li>Second story additions</li>
-                <li>Deck & porch construction</li>
-                <li>Garage construction</li>
-              </ul>
-            </div>
-            
-            <div class="card">
-              <div class="card-icon">🏢</div>
-              <h3>Commercial Build-Outs</h3>
-              <p>Professional commercial spaces designed and built to meet your business needs.</p>
-              <ul>
-                <li>Office space construction</li>
-                <li>Retail build-outs</li>
-                <li>Restaurant construction</li>
-                <li>Warehouse improvements</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO PAGE -->
-    <section id="portfolio" class="page">
-      <div class="section">
-        <div class="container">
-          <div class="section-header">
-            <span class="section-badge">Our Work</span>
-            <h2>Recent Projects</h2>
-            <p>Explore our portfolio of completed projects showcasing our commitment to quality and attention to detail.</p>
-          </div>
-          
-          <div class="portfolio-grid">
-            <div class="portfolio-item">
-              <div class="portfolio-image">📸</div>
-              <div class="portfolio-content">
-                <div class="portfolio-category">Kitchen Renovation</div>
-                <h3>Modern Family Kitchen</h3>
-                <p>Complete kitchen remodel featuring custom cabinetry, quartz countertops, and premium appliances in Providence, RI.</p>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <div class="portfolio-image">📸</div>
-              <div class="portfolio-content">
-                <div class="portfolio-category">Bathroom Remodel</div>
-                <h3>Luxury Master Bath</h3>
-                <p>Spa-inspired bathroom renovation with walk-in shower, double vanity, and heated floors in Cranston, RI.</p>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <div class="portfolio-image">📸</div>
-              <div class="portfolio-content">
-                <div class="portfolio-category">Commercial</div>
-                <h3>Restaurant Build-Out</h3>
-                <p>Complete restaurant construction including kitchen, dining area, and bar in Fall River, MA.</p>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <div class="portfolio-image">📸</div>
-              <div class="portfolio-content">
-                <div class="portfolio-category">Home Addition</div>
-                <h3>Two-Story Addition</h3>
-                <p>Seamless home addition adding 1,200 sq ft of living space in Warwick, RI.</p>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <div class="portfolio-image">📸</div>
-              <div class="portfolio-content">
-                <div class="portfolio-category">Office Renovation</div>
-                <h3>Corporate Office</h3>
-                <p>Modern office renovation featuring open workspace and conference rooms in Providence, RI.</p>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <div class="portfolio-image">📸</div>
-              <div class="portfolio-content">
-                <div class="portfolio-category">Kitchen Renovation</div>
-                <h3>Contemporary Kitchen</h3>
-                <p>Sleek kitchen design with waterfall island and high-end finishes in Newton, MA.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT PAGE -->
-    <section id="contact" class="page">
-      <div class="section section-alt">
-        <div class="container">
-          <div class="section-header">
-            <span class="section-badge">Get In Touch</span>
-            <h2>Start Your Project Today</h2>
-            <p>Ready to transform your space? Contact us for a free consultation and detailed project estimate.</p>
-          </div>
-          
-          <div class="contact-content">
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We\\'ll contact you within 24 hours.'); this.reset();">
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
-              </div>
-              
-              <div class="form-group">
-                <label for="service">Project Type</label>
-                <select id="service" name="service">
-                  <option>Kitchen Renovation</option>
-                  <option>Bathroom Renovation</option>
-                  <option>Home Addition</option>
-                  <option>Commercial Build-Out</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="message">Project Details</label>
-                <textarea id="message" name="message" placeholder="Tell us about your project..."></textarea>
-              </div>
-              
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-            
-            <div class="contact-info">
-              <h3 style="margin-bottom: 30px; color: white;">Contact Information</h3>
-              
-              <div class="contact-item">
-                <div class="contact-icon">📍</div>
-                <div>
-                  <div>Rhode Island & Massachusetts</div>
-                  <div style="font-size: 0.9rem; opacity: 0.8;">Service Areas</div>
-                </div>
-              </div>
-              
-              <div class="contact-item">
-                <div class="contact-icon">📞</div>
-                <div>
-                  <a href="tel:+14010000000">(401) 000-0000</a>
-                  <div style="font-size: 0.9rem; opacity: 0.8;">Mon-Fri 8AM-5PM</div>
-                </div>
-              </div>
-              
-              <div class="contact-item">
-                <div class="contact-icon">✉️</div>
-                <div>
-                  <a href="mailto:hello@gpcontracting.com">hello@gpcontracting.com</a>
-                  <div style="font-size: 0.9rem; opacity: 0.8;">24/7 Email Support</div>
-                </div>
-              </div>
-              
-              <div class="contact-item">
-                <div class="contact-icon">📸</div>
-                <div>
-                  <a href="#">@gp.contracting</a>
-                  <div style="font-size: 0.9rem; opacity: 0.8;">Follow Our Work</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div>© <span id="year"></span> Garcia & Peña General Contracting. All rights reserved.</div>
-        <nav class="footer-links">
-          <a href="#/about" data-link>About</a>
-          <a href="#/services" data-link>Services</a>
-          <a href="#/portfolio" data-link>Portfolio</a>
-          <a href="#/contact" data-link>Contact</a>
+    <header>
+        <nav class="container">
+            <div class="logo">🏗️ Garcia & Peña General Contracting</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('services')">Services</a></li>
+                <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a href="#" onclick="showPage('testimonials')">Testimonials</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
         </nav>
-      </div>
-    </div>
-  </footer>
+    </header>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content fade-in">
+                        <div class="hero-text">
+                            <h1>Premium General Contracting</h1>
+                            <p>Transform your space with expert kitchen & bath renovations, seamless additions, and professional commercial build-outs. Over 15 years of excellence in Rhode Island & Massachusetts.</p>
+                            <a href="#" onclick="showPage('contact')" class="cta-button">Get Free Quote</a>
+                            <a href="tel:+14010000000" class="cta-button call-button">📞 Call Now</a>
+                        </div>
+                        <div class="hero-logo">
+                            <img src="garcia.png" alt="Garcia & Peña General Contracting" />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    // Mobile menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-    
-    menuToggle?.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-    });
+            <section class="section">
+                <div class="container">
+                    <h2>Our Services</h2>
+                    <div class="services-grid">
+                        <div class="service-card fade-in">
+                            <div class="service-icon">🍽️</div>
+                            <h3>Kitchen Remodeling</h3>
+                            <p>Custom cabinetry, premium countertops, and complete kitchen transformations with expert craftsmanship.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <div class="service-icon">🛁</div>
+                            <h3>Bathroom Renovations</h3>
+                            <p>Luxury spa-like bathrooms with precision tile work, custom fixtures, and waterproofing expertise.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <div class="service-icon">🏠</div>
+                            <h3>Home Additions</h3>
+                            <p>Seamless room additions, second stories, and structural expansions that blend with your home.</p>
+                        </div>
+                        <div class="service-card fade-in">
+                            <div class="service-icon">🏢</div>
+                            <h3>Commercial Build-Outs</h3>
+                            <p>Professional restaurant, office, and retail spaces delivered on time and within budget.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-    // Close menu when clicking links
-    navMenu?.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-      });
-    });
+        <!-- About Page -->
+        <div id="about" class="page">
+            <section class="section">
+                <div class="container">
+                    <h2>About Garcia & Peña General Contracting</h2>
+                    <div class="about-content">
+                        <div class="about-image">
+                            <img src="garcia.png" alt="Garcia & Peña" class="company-logo" />
+                            <h3>Meet Our Team</h3>
+                        </div>
+                        <div class="about-text">
+                            <p>Welcome to Garcia & Peña General Contracting! We've been serving Rhode Island and Massachusetts with premium construction services for over 15 years, transforming homes and businesses with unmatched craftsmanship and professional integrity.</p>
+                            <p>What started as a passion for quality construction has grown into a full-service contracting business that helps property owners achieve their vision through expert renovation and construction services.</p>
+                            <h3>Our Mission</h3>
+                            <p>To deliver exceptional construction services that exceed expectations while building lasting relationships with our clients through trust, reliability, and superior craftsmanship.</p>
+                            <h3>Why Choose Us?</h3>
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li>✓ Family-owned and operated</li>
+                                <li>✓ Licensed and fully insured</li>
+                                <li>✓ 15+ years of experience</li>
+                                <li>✓ 250+ completed projects</li>
+                                <li>✓ Satisfaction guaranteed</li>
+                                <li>✓ Transparent pricing</li>
+                                <li>✓ Clean, professional crews</li>
+                                <li>✓ On-time project delivery</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-    // Router
-    const pages = document.querySelectorAll('.page');
-    const navLinks = document.querySelectorAll('[data-link]');
+        <!-- Services Page -->
+        <div id="services" class="page">
+            <section class="section">
+                <div class="container">
+                    <h2>Our Professional Services</h2>
+                    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">Comprehensive construction solutions for residential and commercial properties</p>
+                    
+                    <div class="services-section">
+                        <div class="service-category">
+                            <h3>🍽️ Kitchen Remodeling</h3>
+                            <ul class="service-list">
+                                <li>Custom cabinet design & installation</li>
+                                <li>Quartz & granite countertops</li>
+                                <li>Kitchen island construction</li>
+                                <li>Complete electrical & plumbing</li>
+                                <li>Tile backsplash installation</li>
+                                <li>Hardwood & luxury vinyl flooring</li>
+                                <li>Appliance installation & integration</li>
+                                <li>Lighting design & installation</li>
+                                <li>Kitchen layout optimization</li>
+                                <li>Permit acquisition & management</li>
+                            </ul>
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: #fff3e0; border-radius: 10px; border-left: 4px solid #e67e22;">
+                                <h4 style="color: #e67e22; margin-bottom: 0.5rem;">Why Choose Our Kitchen Services?</h4>
+                                <p style="color: #555; margin: 0;">Expert design consultation, premium materials, and meticulous craftsmanship ensure your kitchen becomes the heart of your home.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-category">
+                            <h3>🛁 Bathroom Renovations</h3>
+                            <ul class="service-list">
+                                <li>Complete bathroom remodeling</li>
+                                <li>Walk-in shower installations</li>
+                                <li>Custom vanity construction</li>
+                                <li>Tile work & waterproofing</li>
+                                <li>Heated floor installation</li>
+                                <li>Luxury fixtures & fittings</li>
+                                <li>Accessibility modifications</li>
+                                <li>Ventilation system upgrades</li>
+                                <li>Glass shower door installation</li>
+                                <li>Bathroom layout reconfiguration</li>
+                            </ul>
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: #e3f2fd; border-radius: 10px; border-left: 4px solid #2196f3;">
+                                <h4 style="color: #1976d2; margin-bottom: 0.5rem;">Why Choose Our Bathroom Services?</h4>
+                                <p style="color: #555; margin: 0;">Precision waterproofing, luxury finishes, and attention to detail create spa-like retreats in your home.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="services-section">
+                        <div class="service-category">
+                            <h3>🏠 Home Additions & Carpentry</h3>
+                            <ul class="service-list">
+                                <li>Room additions & extensions</li>
+                                <li>Second story additions</li>
+                                <li>Deck & porch construction</li>
+                                <li>Garage construction & conversions</li>
+                                <li>Custom millwork & trim</li>
+                                <li>Built-in storage solutions</li>
+                                <li>Structural framing & foundations</li>
+                                <li>Dormer installations</li>
+                                <li>Window & door installations</li>
+                                <li>Exterior siding & roofing</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-category">
+                            <h3>🏢 Commercial Build-Outs</h3>
+                            <ul class="service-list">
+                                <li>Restaurant construction & fit-outs</li>
+                                <li>Office space renovations</li>
+                                <li>Retail store build-outs</li>
+                                <li>Medical office construction</li>
+                                <li>Warehouse improvements</li>
+                                <li>Code compliance & permitting</li>
+                                <li>MEP coordination & management</li>
+                                <li>ADA compliance modifications</li>
+                                <li>Commercial kitchen installations</li>
+                                <li>Flexible scheduling & night work</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Service Areas -->
+                    <div style="margin-top: 4rem; text-align: center;">
+                        <h3 style="color: #e67e22; margin-bottom: 2rem;">Service Areas</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto;">
+                            <div style="padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                <strong>Providence, RI</strong>
+                            </div>
+                            <div style="padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                <strong>Warwick, RI</strong>
+                            </div>
+                            <div style="padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                <strong>Cranston, RI</strong>
+                            </div>
+                            <div style="padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                <strong>Fall River, MA</strong>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; color: #666;">And surrounding areas in Rhode Island & Massachusetts</p>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div style="margin-top: 4rem; text-align: center; padding: 3rem; background: linear-gradient(135deg, #e67e22, #d35400); border-radius: 15px; color: white;">
+                        <h3 style="margin-bottom: 1rem; font-size: 2rem;">Ready to Transform Your Space?</h3>
+                        <p style="margin-bottom: 2rem; font-size: 1.2rem; opacity: 0.9;">Contact us today for your free estimate and design consultation</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <a href="#" onclick="showPage('contact')" class="cta-button" style="margin: 0;">Get Free Quote</a>
+                            <a href="tel:+14010000000" class="cta-button call-button" style="margin: 0;">📞 Call Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Portfolio Page -->
+        <div id="portfolio" class="page">
+            <section class="section">
+                <div class="container">
+                    <h2>Our Work Portfolio</h2>
+                    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">See the quality and craftsmanship in our completed projects</p>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <strong>Kitchen Remodeling Projects</strong>
+                        </div>
+                        <div class="gallery-item">
+                            <strong>Bathroom Renovations</strong>
+                        </div>
+                        <div class="gallery-item">
+                            <strong>Home Addition Completions</strong>
+                        </div>
+                        <div class="gallery-item">
+                            <strong>Commercial Build-Outs</strong>
+                        </div>
+                        <div class="gallery-item">
+                            <strong>Custom Carpentry Work</strong>
+                        </div>
+                        <div class="gallery-item">
+                            <strong>Before & After Transformations</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Testimonials Page -->
+        <div id="testimonials" class="page">
+            <section class="section">
+                <div class="container">
+                    <h2>What Our Clients Say</h2>
+                    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">Real reviews from satisfied customers</p>
+                    <div class="testimonials">
+                        <div class="testimonial">
+                            <div class="stars">★★★★★</div>
+                            <p>"Garcia & Peña completely transformed our kitchen! They were professional, on time, and the attention to detail was incredible. The craftsmanship exceeded our expectations."</p>
+                            <div class="testimonial-author">Sarah & Michael Chen - Providence, RI</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="stars">★★★★★</div>
+                            <p>"Outstanding work on our master bathroom renovation. The team was clean, respectful, and delivered exactly what they promised. Highly recommend!"</p>
+                            <div class="testimonial-author">James Martinez - Cranston, RI</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="stars">★★★★★</div>
+                            <p>"They handled our restaurant build-out with exceptional professionalism. The project was completed ahead of schedule and within budget. Amazing work!"</p>
+                            <div class="testimonial-author">Restaurant Owner - Fall River, MA</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="stars">★★★★★</div>
+                            <p>"From design to completion, Garcia & Peña made our home addition seamless. Their team was skilled, reliable, and delivered exactly what we envisioned."</p>
+                            <div class="testimonial-author">The Johnson Family - Warwick, RI</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="stars">★★★★★</div>
+                            <p>"Exceptional quality and transparent communication throughout our office renovation. They worked around our business hours to minimize disruption."</p>
+                            <div class="testimonial-author">Tech Startup CEO - Providence, RI</div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="stars">★★★★★</div>
+                            <p>"The custom millwork and attention to detail in our historic home renovation was remarkable. They preserved the character while adding modern functionality."</p>
+                            <div class="testimonial-author">Historic Homeowner - Newport, RI</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <section class="section">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">Get in touch for your free quote and consultation</p>
+                    <div class="contact-content">
+                        <div class="contact-form">
+                            <h3>Send us a message</h3>
+                            <form onsubmit="submitForm(event)">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
