@@ -1,0 +1,42 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import siteDevelopmentImg from "@/assets/site-development.jpg";
+import demolitionImg from "@/assets/demolition.jpg";
+import landClearingImg from "@/assets/land-clearing.jpg";
+import crushingImg from "@/assets/crushing.jpg";
+import recyclingImg from "@/assets/recycling.jpg";
+import materialSalesImg from "@/assets/material-sales.jpg";
+
+const Gallery = () => {
+  const galleryImages = [
+    {
+      src: siteDevelopmentImg,
+      alt: "Site Development Project",
+      caption: "Commercial site development with precision grading"
+    },
+    {
+      src: demolitionImg,
+      alt: "Demolition Work",
+      caption: "Safe demolition of industrial facility"
+    },
+    {
+      src: landClearingImg,
+      alt: "Land Clearing",
+      caption: "Environmentally conscious land clearing"
+    },
+    {
+      src: crushingImg,
+      alt: "Material Crushing",
+      caption: "On-site material crushing and processing"
+    },
+    {
+      src: recyclingImg,
+      alt: "Material Recycling",
+      caption: "Sustainable material recycling operations"
+    },
+    {
+      src: materialSalesImg,
+      alt: "Material Sales",
+      caption: "Quality construction materials supply"
+    }
+  ];
