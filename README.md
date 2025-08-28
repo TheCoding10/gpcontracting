@@ -1,2 +1,0 @@
-# gpcontracting
-For Alex
